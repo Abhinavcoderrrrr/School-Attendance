@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Attendance System</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container d-flex flex-column vh-100 justify-content-center align-items-center">
+    <div class="text-center mb-5">
+      <h1 class="display-4 mb-4">School Attendance System</h1>
+      <p class="lead mb-5">A simple and efficient way to manage student attendance</p>
+      <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+        <a href="teacher-dashboard.html" class="btn btn-primary btn-lg px-4 py-3">
+          <i class="fas fa-chalkboard-teacher me-2"></i>Enter Dashboard
+        </a>
+        <button class="btn btn-outline-secondary btn-lg px-4 py-3" data-bs-toggle="modal" data-bs-target="#creatorModal">
+          <i class="fas fa-user-circle me-2"></i>About the Creator
+        </button>
+      </div>
+    </div>
+    
+    <footer class="mt-auto text-center py-3">
+      <p class="text-muted mb-0">&copy; 2025 Abhinav Jha. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- About Creator Modal -->
+  <div class="modal fade" id="creatorModal" tabindex="-1" aria-labelledby="creatorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="creatorModalLabel">About the Creator</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-4">
+            <i class="fas fa-user-circle fa-5x text-primary mb-3"></i>
+            <h3 class="h4">Abhinav Jha</h3>
+            <p class="text-muted">Frontend Developer</p>
+          </div>
+          <p>Passionate frontend developer with expertise in creating intuitive and user-friendly web applications. Specializing in HTML, CSS, JavaScript, and modern frameworks, I focus on building responsive and accessible interfaces.</p>
+          <p>This School Attendance System was developed to streamline the attendance tracking process for educational institutions, making it easier for teachers to manage student records and communicate with parents.</p>
+          <div class="d-flex justify-content-center mt-4">
+            <a href="https://github.com/Abhinavcoderrrrr" target="_blank" class="btn btn-outline-dark">
+              <i class="fab fa-github me-2"></i>GitHub
+            </a>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set logged in state by default
+      localStorage.setItem('teacherLoggedIn', 'true');
+    });
+  </script>
+</body>
+</html> 
