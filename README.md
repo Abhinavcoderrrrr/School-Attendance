@@ -4,7 +4,6 @@ Welcome to the School Attendance System! This project is designed to streamline 
 
 ## Features
 
-- **Student Registration and Login**: Allows students to create accounts and log in to view their attendance records.
 - **Teacher Dashboard**: Provides teachers with tools to mark attendance, view student records, and send notifications.
 - **Real-time Search**: Enables teachers to quickly find students using a search bar that filters results as you type.
 - **Bulk Actions**: Supports marking multiple students as present or absent and sending email notifications to parents.
@@ -36,8 +35,7 @@ Welcome to the School Attendance System! This project is designed to streamline 
 
 ## Usage
 
-- **Teachers**: Log in to the dashboard to manage student attendance and send notifications.
-- **Students**: Register and log in to view your attendance records.
+- **Teachers**: Get started to the dashboard to manage student attendance and send notifications.
 
 ## About the Creator
 
@@ -63,3 +61,5 @@ For any questions or feedback, please contact me at [your-email@example.com].
 ---
 
 Thank you for using the School Attendance System!
+
+© Abhinav Jha 2025, All Right Reserved
