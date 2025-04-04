@@ -3,31 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teacher Dashboard | School Attendance System</title>
+  <title>Teacher Dashboard | School Attendance System - By Abhinav jha</title>
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container-fluid d-flex flex-column align-items-center">
-    <header class="header bg-primary text-white p-3 rounded mb-4 text-center w-100">
-      <div class="d-flex justify-content-between align-items-center">
+  <div class="dashboard-wrapper">
+    <div class="container">
+      <header class="header shadow-sm d-flex justify-content-between align-items-center">
         <div class="logo">
-          <h1 class="h3 mb-0">School Attendance System</h1>
+          <h1 class="mb-0">School Attendance System</h1>
         </div>
         <div class="user-info">
-          <a href="index.html" class="btn btn-outline-light">
-            <i class="fas fa-home"></i>
-            Home
+          <a href="index.html" class="btn btn-outline-primary">
+            <i class="fas fa-home me-2"></i>Home
           </a>
-        </div>
       </div>
     </header>
 
-    <div class="card shadow-sm mb-4 w-100 text-center">
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <div class="card">
       <div class="card-body">
-        <ul class="nav nav-tabs justify-content-center" id="teacherTabs" role="tablist">
+              <ul class="nav nav-tabs" id="teacherTabs" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="add-student-tab" data-bs-toggle="tab" data-bs-target="#add-student" type="button" role="tab">
               <i class="fas fa-user-plus me-2"></i>Add Student
@@ -43,39 +47,48 @@
               <i class="fas fa-clipboard-check me-2"></i>Mark Attendance
             </button>
           </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="track-attendance-tab" data-bs-toggle="tab" data-bs-target="#track-attendance" type="button" role="tab">
+              <i class="fas fa-calendar-alt me-2"></i>Track Attendance
+            </button>
+          </li>
         </ul>
 
-        <div class="tab-content p-3 text-center" id="teacherTabsContent">
+              <div class="tab-content" id="teacherTabsContent">
           <!-- Add Student Tab -->
           <div class="tab-pane fade show active" id="add-student" role="tabpanel">
-            <h3 class="h4 mb-4 text-center">Add New Student</h3>
-            <p class="text-muted mb-4 text-center">Fill in the details below to add a new student to the system.</p>
-            
-            <div id="add-student-message" class="d-none text-center"></div>
-            
-            <form id="add-student-form" class="text-center">
-              <div class="row g-3 justify-content-center">
+                  <div class="row mb-4">
+                    <div class="col-md-12 text-center">
+                      <h3 class="h4">Add New Student</h3>
+                      <p class="text-muted">Fill in the details below to add a new student to the system.</p>
+                    </div>
+                  </div>
+                  
+                  <div id="add-student-message" class="alert d-none text-center mb-4"></div>
+                  
+                  <form id="add-student-form">
+                    <div class="row g-4">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="studentName" class="form-label">Full Name *</label>
+                          <label for="studentName" class="form-label">Full Name <span class="text-danger">*</span></label>
                     <input type="text" id="studentName" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="studentRoll" class="form-label">Roll Number *</label>
+                          <label for="studentRoll" class="form-label">Roll Number <span class="text-danger">*</span></label>
                     <input type="text" id="studentRoll" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="studentClass" class="form-label">Class *</label>
+                          <label for="studentClass" class="form-label">Class <span class="text-danger">*</span></label>
                     <input type="text" id="studentClass" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="studentEmail" class="form-label">Email *</label>
+                          <label for="studentEmail" class="form-label">Email <span class="text-danger">*</span></label>
                     <input type="email" id="studentEmail" class="form-control" required>
                   </div>
                 </div>
@@ -91,27 +104,31 @@
                     <input type="text" id="studentAddress" class="form-control">
                   </div>
                 </div>
-              </div>
-              <div class="mt-4 text-center">
-                <button type="submit" class="btn btn-primary">
+                      <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
                   <i class="fas fa-plus-circle me-2"></i>Add Student
                 </button>
+                      </div>
               </div>
             </form>
           </div>
 
           <!-- Manage Students Tab -->
           <div class="tab-pane fade" id="manage-students" role="tabpanel">
-            <div class="card shadow-sm mb-4 text-center">
+                  <div class="card mb-4">
               <div class="card-body">
-                <h3 class="h4 mb-4 text-center">Data Management</h3>
-                <p class="text-muted mb-4 text-center">Save your students data to a file or restore from a previously saved file.</p>
-                
-                <div class="d-flex gap-3 mb-4 justify-content-center">
+                      <div class="row mb-4">
+                        <div class="col-md-12 text-center">
+                          <h3 class="h4">Data Management</h3>
+                          <p class="text-muted">Save your students data to a file or restore from a previously saved file.</p>
+                        </div>
+                      </div>
+                      
+                      <div class="d-flex flex-wrap gap-3 justify-content-center mb-4">
                   <button id="export-data-btn" class="btn btn-primary">
                     <i class="fas fa-download me-2"></i>Export Students Data
                   </button>
-                  <label for="import-data" class="btn btn-secondary">
+                        <label for="import-data" class="btn btn-outline-primary">
                     <i class="fas fa-upload me-2"></i>Import Students Data
                   </label>
                   <input type="file" id="import-data" class="d-none" accept=".txt">
@@ -121,33 +138,40 @@
               </div>
             </div>
             
-            <div class="card shadow-sm text-center">
+                  <div class="card">
               <div class="card-body">
-                <h3 class="h4 mb-4 text-center">Students List</h3>
-                <div id="students-loading" class="text-center py-5">
-                  <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
+                      <div class="row mb-4">
+                        <div class="col-md-12 text-center">
+                          <h3 class="h4">Students List</h3>
+                        </div>
+                      </div>
+                      
+                      <div id="students-loading" class="py-5 text-center">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
                   <p class="mt-2">Loading students data...</p>
                 </div>
                 
                 <div id="students-container" class="d-none">
                   <div class="table-responsive">
-                    <table class="table table-hover text-center" id="students-table">
-                      <thead class="table-light">
-                        <tr>
-                          <th class="text-center">#</th>
-                          <th class="text-center">Roll No.</th>
-                          <th class="text-center">Name</th>
-                          <th class="text-center">Class</th>
-                          <th class="text-center">Email</th>
-                          <th class="text-center">Actions</th>
+                          <table class="table table-hover" id="students-table">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Roll No.</th>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Email</th>
+                                <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody id="students-list" class="text-center">
+                            <tbody id="students-list">
                         <!-- Students will be listed here -->
                       </tbody>
                     </table>
                   </div>
-                  <div id="no-students" class="text-center py-4 d-none">
+                        <div id="no-students" class="py-4 text-center d-none">
                     <p class="text-muted mb-0">No students found. Please add students using the "Add Student" tab.</p>
                   </div>
                 </div>
@@ -157,12 +181,12 @@
 
           <!-- Mark Attendance Tab -->
           <div class="tab-pane fade" id="mark-attendance" role="tabpanel">
-            <div class="card shadow-sm mb-4 text-center">
-              <div class="card-body">
-                <h3 class="h4 mb-4 text-center">Mark Attendance for Today</h3>
-                <p class="text-muted mb-4 text-center">Search for students and mark their attendance.</p>
-                
-                <div class="row g-3 justify-content-center">
+                  <div class="attendance-date-container mb-4">
+                    <div class="row">
+                      <div class="col-md-12 text-center mb-4">
+                        <h3 class="h4">Mark Attendance for Today</h3>
+                        <p class="text-muted">Search for students and mark their attendance.</p>
+                      </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="attendance-date" class="form-label">Date</label>
@@ -177,68 +201,163 @@
                         <button id="search-students-btn" class="btn btn-primary">
                           <i class="fas fa-search me-2"></i>Search
                         </button>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div id="attendance-container" class="card shadow-sm d-none text-center">
-              <div class="card-body">
-                <h3 class="h4 mb-4 text-center">Attendance Sheet</h3>
-                <div id="attendance-loading" class="text-center py-5 d-none">
-                  <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
-                  <p class="mt-2">Loading student data...</p>
+                  <div id="attendance-container" class="attendance-list d-none">
+                    <div class="attendance-list-header">
+                      <div class="row align-items-center">
+                        <div class="col-md-6">
+                          <h4 class="h5 mb-0">Attendance Sheet</h4>
                 </div>
-                
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="select-all-students">
-                    <label class="form-check-label" for="select-all-students">
-                      Select All Students
-                    </label>
-                  </div>
-                  <div class="attendance-actions d-none">
-                    <button id="mark-present-btn" class="btn btn-success me-2">
-                      <i class="fas fa-check-circle me-2"></i>Mark Present
-                    </button>
-                    <button id="mark-absent-btn" class="btn btn-danger me-2">
-                      <i class="fas fa-times-circle me-2"></i>Mark Absent
-                    </button>
-                    <button id="send-emails-btn" class="btn btn-warning d-none">
-                      <i class="fas fa-envelope me-2"></i>Send Email Notifications
-                    </button>
+                        <div class="col-md-6 text-md-end">
+                          <div class="row align-items-center">
+                            <div class="col-md-6">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="select-all-students">
+                                <label class="form-check-label" for="select-all-students">
+                                  Select All Students
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                              <button id="group-message-btn" class="btn btn-info btn-sm">
+                                <i class="fas fa-envelope me-2"></i>Send Group Message
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                   </div>
                 </div>
                 
-                <div class="table-responsive">
-                  <table class="table table-hover text-center" id="attendance-table">
-                    <thead class="table-light">
-                      <tr>
-                        <th class="text-center" width="5%">Select</th>
-                        <th class="text-center" width="5%">#</th>
-                        <th class="text-center" width="10%">Roll No.</th>
-                        <th class="text-center" width="20%">Name</th>
-                        <th class="text-center" width="15%">Class</th>
-                        <th class="text-center" width="25%">Status</th>
-                        <th class="text-center" width="20%">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="attendance-list" class="text-center">
-                      <!-- Students for attendance will be displayed here -->
-                    </tbody>
-                  </table>
+                <div id="attendance-alerts" class="mt-3 mb-3 d-none">
+                  <!-- Alerts will be dynamically added here -->
                 </div>
                 
-                <div id="no-students-attendance" class="text-center py-4 d-none">
-                  <p class="text-muted mb-0">No students found. Please try another search term.</p>
+                    <div id="attendance-loading" class="py-5 text-center d-none">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                      <p class="mt-2">Loading student data...</p>
                 </div>
                 
-                <div class="text-center mt-4">
-                  <button id="save-attendance-btn" class="btn btn-primary">
+                    <div id="found-students-container">
+                      <div id="found-students-list">
+                        <!-- Students for attendance will be listed here -->
+                      </div>
+                      <div id="no-found-students" class="py-4 text-center d-none">
+                        <p class="text-muted mb-0">No students found matching your search criteria.</p>
+                      </div>
+                </div>
+                
+                    <div class="p-4 text-center">
+                      <button id="mark-attendance-btn" class="btn btn-success btn-lg">
                     <i class="fas fa-save me-2"></i>Save Attendance
                   </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <!-- Track Attendance Tab -->
+          <div class="tab-pane fade" id="track-attendance" role="tabpanel">
+            <div class="attendance-date-container mb-4">
+              <div class="row">
+                <div class="col-md-12 text-center mb-4">
+                  <h3 class="h4">Track Daily Attendance</h3>
+                  <p class="text-muted">Select a date to view attendance records for all students.</p>
+                </div>
+                <div class="col-md-6 mx-auto">
+                  <div class="form-group">
+                    <label for="track-date" class="form-label">Select Date</label>
+                    <input type="date" id="track-date" class="form-control" required>
+                  </div>
+                  <div class="d-grid mt-3">
+                    <button id="fetch-attendance-btn" class="btn btn-primary">
+                      <i class="fas fa-search me-2"></i>Fetch Attendance Records
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div id="date-attendance-container" class="d-none">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <h4 class="h5 mb-0 attendance-date-display">Attendance for: <span id="selected-date-display"></span></h4>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-4">
+                      <div class="card border-0 bg-light-alt">
+                        <div class="card-body text-center">
+                          <p class="text-muted mb-1">Total Students</p>
+                          <h3 class="h2 mb-0" id="total-students-count">0</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card border-0 bg-success bg-opacity-10">
+                        <div class="card-body text-center">
+                          <p class="text-success mb-1">Present</p>
+                          <h3 class="h2 mb-0 text-success" id="present-students-count">0</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card border-0 bg-danger bg-opacity-10">
+                        <div class="card-body text-center">
+                          <p class="text-danger mb-1">Absent</p>
+                          <h3 class="h2 mb-0 text-danger" id="absent-students-count">0</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="attendance-list">
+                <div class="attendance-list-header">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <h4 class="h5 mb-0">Student Attendance Details</h4>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="date-attendance-loading" class="py-5 text-center d-none">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <p class="mt-2">Loading attendance data...</p>
+                </div>
+                
+                <div id="date-attendance-content">
+                  <div class="table-responsive">
+                    <table class="table table-hover" id="date-attendance-table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Roll No.</th>
+                          <th>Name</th>
+                          <th>Class</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="date-attendance-list">
+                        <!-- Students attendance for the selected date will be listed here -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <div id="no-date-attendance" class="py-4 text-center d-none">
+                    <p class="text-muted mb-0">No attendance records found for the selected date.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -246,24 +365,123 @@
         </div>
       </div>
     </div>
-
-    <footer class="footer text-center py-4 mt-5 w-100">
-      <p class="text-muted mb-0">&copy; 2025 Abhinav Jha. All rights reserved.</p>
-    </footer>
   </div>
 
-  <!-- Delete Confirmation Modal -->
-  <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <!-- Student Details Modal -->
+  <div class="modal fade" id="studentDetailsModal" tabindex="-1" aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+          <h5 class="modal-title" id="studentDetailsModalLabel">Student Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body text-center">
-          <p>Are you sure you want to delete this student? This action cannot be undone.</p>
+        <div class="modal-body">
+          <div id="student-details-content">
+            <!-- Student details will be populated here -->
+          </div>
         </div>
-        <div class="modal-footer justify-content-center">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Student Modal -->
+  <div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editStudentModalLabel">Edit Student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-student-form">
+            <input type="hidden" id="edit-student-id">
+            <div class="form-group mb-3">
+              <label for="edit-studentName" class="form-label">Full Name</label>
+              <input type="text" id="edit-studentName" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="edit-studentRoll" class="form-label">Roll Number</label>
+              <input type="text" id="edit-studentRoll" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="edit-studentClass" class="form-label">Class</label>
+              <input type="text" id="edit-studentClass" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="edit-studentEmail" class="form-label">Email</label>
+              <input type="email" id="edit-studentEmail" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="edit-studentPhone" class="form-label">Phone Number</label>
+              <input type="tel" id="edit-studentPhone" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+              <label for="edit-studentAddress" class="form-label">Address</label>
+              <input type="text" id="edit-studentAddress" class="form-control">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-edit-student">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Attendance Record Modal -->
+  <div class="modal fade" id="attendanceRecordModal" tabindex="-1" aria-labelledby="attendanceRecordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="attendanceRecordModalLabel">Attendance Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="attendance-stats" class="row mb-4 text-center">
+            <!-- Attendance statistics will be displayed here -->
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attendance-history">
+                <!-- Attendance history will be displayed here -->
+              </tbody>
+            </table>
+          </div>
+          <div id="no-attendance-record" class="text-center py-4 d-none">
+            <p class="text-muted mb-0">No attendance records found for this student.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this student? This action cannot be undone.</p>
+          <input type="hidden" id="delete-student-id">
+        </div>
+        <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete</button>
         </div>
@@ -276,802 +494,9 @@
   <script src="script.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Initialize Bootstrap components
-      const deleteModal = new bootstrap.Modal(document.getElementById('delete-modal'), {
-        backdrop: true,
-        keyboard: true
-      });
-      let studentToDelete = null;
-      
-      // Current date for attendance
+      // Today's date for attendance
       document.getElementById('attendance-date').value = getTodayDate();
-      
-      // Initialize forms and tables
-      initAddStudentForm();
-      initStudentManagement();
-      initAttendanceSystem();
-      
-      // Setup delete functionality
-      document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('delete-btn') || e.target.parentElement.classList.contains('delete-btn')) {
-          // Find the delete button (could be the icon or the button itself)
-          const deleteBtn = e.target.classList.contains('delete-btn') ? e.target : e.target.parentElement;
-          studentToDelete = deleteBtn.getAttribute('data-id');
-          deleteModal.show();
-        }
-      });
-      
-      // Confirm delete
-      document.getElementById('confirm-delete-btn').addEventListener('click', function() {
-        if (studentToDelete) {
-          deleteStudent(studentToDelete);
-          deleteModal.hide();
-          studentToDelete = null;
-        }
-      });
-      
-      // Add date change event
-      document.getElementById('attendance-date').addEventListener('change', function() {
-        loadAllStudentsForAttendance();
-      });
     });
-    
-    // STUDENT MANAGEMENT FUNCTIONS
-    
-    function initAddStudentForm() {
-      const addStudentForm = document.getElementById('add-student-form');
-      const addStudentMessage = document.getElementById('add-student-message');
-      
-      addStudentForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('studentName').value.trim();
-        const rollNumber = document.getElementById('studentRoll').value.trim();
-        const className = document.getElementById('studentClass').value.trim();
-        const email = document.getElementById('studentEmail').value.trim();
-        const phone = document.getElementById('studentPhone').value.trim();
-        const address = document.getElementById('studentAddress').value.trim();
-        
-        // Validate required fields
-        if (!name || !rollNumber || !className || !email) {
-          showTemporaryMessage(addStudentMessage, 'Please fill in all required fields.', 'error');
-          return;
-        }
-        
-        // Get existing students from local storage
-        const students = JSON.parse(localStorage.getItem('students')) || [];
-        
-        // Check if student with same roll number and class already exists
-        const existingStudent = students.find(s => s.rollNumber === rollNumber && s.class === className);
-        if (existingStudent) {
-          showTemporaryMessage(addStudentMessage, 'A student with this roll number already exists in this class.', 'error');
-          return;
-        }
-        
-        // Create new student object
-        const newStudent = {
-          id: generateUniqueId(),
-          name: name,
-          rollNumber: rollNumber,
-          class: className,
-          email: email,
-          phone: phone || '',
-          address: address || '',
-          createdAt: new Date().toISOString()
-        };
-        
-        // Add to students array
-        students.push(newStudent);
-        
-        // Save to local storage
-        localStorage.setItem('students', JSON.stringify(students));
-        
-        // Show success message
-        showTemporaryMessage(addStudentMessage, 'Student added successfully!', 'success');
-        
-        // Reset form
-        addStudentForm.reset();
-        
-        // Refresh student list if visible
-        if (!document.getElementById('manage-students').classList.contains('active')) {
-          loadStudents();
-        }
-      });
-    }
-    
-    function initStudentManagement() {
-      const exportDataBtn = document.getElementById('export-data-btn');
-      const importDataInput = document.getElementById('import-data');
-      const fileMessage = document.getElementById('file-message');
-      
-      // Load students when manage-students tab is shown
-      const manageStudentsTab = document.getElementById('manage-students-tab');
-      manageStudentsTab.addEventListener('shown.bs.tab', function () {
-        loadStudents();
-      });
-      
-      // Export data functionality
-      exportDataBtn.addEventListener('click', function() {
-        const students = JSON.parse(localStorage.getItem('students')) || [];
-        
-        if (students.length === 0) {
-          showTemporaryMessage(fileMessage, 'No students data to export.', 'error');
-          return;
-        }
-        
-        // Use utility function to export data
-        if (exportToFile(students, 'students_data.txt')) {
-          showTemporaryMessage(fileMessage, 'Data exported successfully! File: students_data.txt', 'success');
-        }
-      });
-      
-      // Import data functionality
-      importDataInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          try {
-            const importedData = JSON.parse(e.target.result);
-            
-            // Validate data format
-            if (!Array.isArray(importedData)) {
-              throw new Error('Invalid data format. Expected an array of students.');
-            }
-            
-            // Get existing students
-            const existingStudents = JSON.parse(localStorage.getItem('students')) || [];
-            
-            // Counter for new and updated students
-            let newStudents = 0;
-            let updatedStudents = 0;
-            
-            // Process imported students
-            importedData.forEach(importedStudent => {
-              // Validate required fields
-              if (!importedStudent.name || !importedStudent.rollNumber || !importedStudent.class || !importedStudent.email) {
-                throw new Error('Invalid student data. Missing required fields.');
-              }
-              
-              // Ensure student has an ID
-              if (!importedStudent.id) {
-                importedStudent.id = generateUniqueId();
-              }
-              
-              // Check if student already exists (same roll number and class)
-              const existingIndex = existingStudents.findIndex(s => 
-                s.rollNumber === importedStudent.rollNumber && 
-                s.class === importedStudent.class
-              );
-              
-              if (existingIndex !== -1) {
-                // Update existing student
-                existingStudents[existingIndex] = importedStudent;
-                updatedStudents++;
-              } else {
-                // Add new student
-                existingStudents.push(importedStudent);
-                newStudents++;
-              }
-            });
-            
-            // Save merged students to local storage
-            localStorage.setItem('students', JSON.stringify(existingStudents));
-            
-            // Build success message
-            let successMessage = 'Import completed successfully! ';
-            if (newStudents > 0) {
-              successMessage += `${newStudents} new student${newStudents !== 1 ? 's' : ''} added. `;
-            }
-            if (updatedStudents > 0) {
-              successMessage += `${updatedStudents} student${updatedStudents !== 1 ? 's' : ''} updated.`;
-            }
-            
-            // Show success message
-            showTemporaryMessage(fileMessage, successMessage, 'success');
-            
-            // Reload students list
-            loadStudents();
-            
-            // Reset file input
-            importDataInput.value = '';
-          } catch (error) {
-            showTemporaryMessage(fileMessage, `Error importing data: ${error.message}`, 'error');
-            // Reset file input
-            importDataInput.value = '';
-          }
-        };
-        reader.readAsText(file);
-      });
-    }
-    
-    function loadStudents() {
-      const studentsLoading = document.getElementById('students-loading');
-      const studentsContainer = document.getElementById('students-container');
-      const studentsList = document.getElementById('students-list');
-      const noStudents = document.getElementById('no-students');
-      
-      // Show loading
-      studentsLoading.classList.remove('d-none');
-      studentsContainer.classList.add('d-none');
-      
-      // Get students from local storage
-      const students = JSON.parse(localStorage.getItem('students')) || [];
-      
-      // Hide loading
-      studentsLoading.classList.add('d-none');
-      studentsContainer.classList.remove('d-none');
-      
-      // Check if there are any students
-      if (students.length === 0) {
-        noStudents.classList.remove('d-none');
-        studentsList.innerHTML = '';
-        return;
-      }
-      
-      // Hide no students message
-      noStudents.classList.add('d-none');
-      
-      // Clear previous list
-      studentsList.innerHTML = '';
-      
-      // Sort students by class and roll number
-      students.sort((a, b) => {
-        if (a.class === b.class) {
-          return a.rollNumber.localeCompare(b.rollNumber, undefined, { numeric: true });
-        }
-        return a.class.localeCompare(b.class);
-      });
-      
-      // Render each student with sequential number
-      students.forEach((student, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${student.rollNumber}</td>
-          <td>${student.name}</td>
-          <td>${student.class}</td>
-          <td>${student.email}</td>
-          <td>
-            <div class="action-buttons">
-              <button class="delete-btn btn btn-sm btn-danger" data-id="${student.id}">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </td>
-        `;
-        studentsList.appendChild(row);
-      });
-    }
-    
-    function deleteStudent(studentId) {
-      // Get students from local storage
-      let students = JSON.parse(localStorage.getItem('students')) || [];
-      
-      // Find the student to delete
-      const studentIndex = students.findIndex(s => s.id === studentId);
-      
-      if (studentIndex === -1) {
-        return; // Student not found
-      }
-      
-      // Remove the student
-      students.splice(studentIndex, 1);
-      
-      // Save updated students to local storage
-      localStorage.setItem('students', JSON.stringify(students));
-      
-      // Reload students list
-      loadStudents();
-      
-      // Show temporary message
-      const fileMessage = document.getElementById('file-message');
-      showTemporaryMessage(fileMessage, 'Student deleted successfully.', 'success');
-    }
-    
-    function initAttendanceSystem() {
-      const searchStudentsBtn = document.getElementById('search-students-btn');
-      const studentSearch = document.getElementById('student-search');
-      const selectAllCheckbox = document.getElementById('select-all-students');
-      const markPresentBtn = document.getElementById('mark-present-btn');
-      const markAbsentBtn = document.getElementById('mark-absent-btn');
-      const sendEmailsBtn = document.getElementById('send-emails-btn');
-      const saveAttendanceBtn = document.getElementById('save-attendance-btn');
-      const attendanceActions = document.querySelector('.attendance-actions');
-      
-      // Add remove selected students button
-      const removeSelectedBtn = document.createElement('button');
-      removeSelectedBtn.id = 'remove-selected-btn';
-      removeSelectedBtn.className = 'btn btn-danger me-2';
-      removeSelectedBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Remove Selected';
-      
-      // Insert it after the mark absent button
-      markAbsentBtn.after(removeSelectedBtn);
-      
-      // Set current date
-      document.getElementById('attendance-date').value = getTodayDate();
-      
-      // Load all students when marking attendance tab is shown
-      const markAttendanceTab = document.getElementById('mark-attendance-tab');
-      markAttendanceTab.addEventListener('shown.bs.tab', function() {
-        loadAllStudentsForAttendance();
-      });
-      
-      // Auto-search as user types (with debounce)
-      let searchTimeout;
-      studentSearch.addEventListener('input', function() {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(function() {
-          const searchTerm = studentSearch.value.trim().toLowerCase();
-          if (searchTerm === '') {
-            loadAllStudentsForAttendance(); // Show all students when search is empty
-          } else {
-            searchStudents(searchTerm);
-          }
-        }, 300); // 300ms debounce
-      });
-      
-      // Keep the search button for those who prefer clicking
-      searchStudentsBtn.addEventListener('click', function() {
-        const searchTerm = studentSearch.value.trim().toLowerCase();
-        if (searchTerm === '') {
-          loadAllStudentsForAttendance();
-        } else {
-          searchStudents(searchTerm);
-        }
-      });
-      
-      // Select all students checkbox
-      selectAllCheckbox.addEventListener('change', function() {
-        const checkboxes = document.querySelectorAll('.student-checkbox');
-        checkboxes.forEach(checkbox => {
-          checkbox.checked = selectAllCheckbox.checked;
-        });
-        updateAttendanceActions();
-      });
-      
-      // Update attendance actions when individual checkboxes change
-      document.addEventListener('change', function(e) {
-        if (e.target.classList.contains('student-checkbox')) {
-          updateAttendanceActions();
-        }
-      });
-      
-      // Mark selected students as present
-      markPresentBtn.addEventListener('click', function() {
-        const selectedStudents = getSelectedStudents();
-        selectedStudents.forEach(studentId => {
-          // Update the hidden status input
-          const statusInput = document.querySelector(`.student-status[data-student-id="${studentId}"]`);
-          if (statusInput) {
-            statusInput.value = 'present';
-          }
-          
-          // Update the badges
-          document.querySelector(`.badge.bg-success[data-student-id="${studentId}"]`).classList.remove('d-none');
-          document.querySelector(`.badge.bg-danger[data-student-id="${studentId}"]`).classList.add('d-none');
-          document.querySelector(`.badge.bg-secondary[data-student-id="${studentId}"]`).classList.add('d-none');
-        });
-        
-        updateSendEmailButton();
-      });
-      
-      // Mark selected students as absent
-      markAbsentBtn.addEventListener('click', function() {
-        const selectedStudents = getSelectedStudents();
-        selectedStudents.forEach(studentId => {
-          // Update the hidden status input
-          const statusInput = document.querySelector(`.student-status[data-student-id="${studentId}"]`);
-          if (statusInput) {
-            statusInput.value = 'absent';
-          }
-          
-          // Update the badges
-          document.querySelector(`.badge.bg-success[data-student-id="${studentId}"]`).classList.add('d-none');
-          document.querySelector(`.badge.bg-danger[data-student-id="${studentId}"]`).classList.remove('d-none');
-          document.querySelector(`.badge.bg-secondary[data-student-id="${studentId}"]`).classList.add('d-none');
-        });
-        
-        updateSendEmailButton();
-      });
-      
-      // Remove selected students
-      removeSelectedBtn.addEventListener('click', function() {
-        const selectedStudents = getSelectedStudents();
-        
-        if (selectedStudents.length === 0) {
-          alert('Please select students to remove');
-          return;
-        }
-        
-        if (confirm(`Are you sure you want to remove ${selectedStudents.length} student(s)?`)) {
-          // Get students from localStorage
-          const students = JSON.parse(localStorage.getItem('students')) || [];
-          
-          // Keep track of removed count
-          let removedCount = 0;
-          
-          // Filter out selected students
-          const updatedStudents = students.filter(student => {
-            if (selectedStudents.includes(student.id)) {
-              removedCount++;
-              return false;
-            }
-            return true;
-          });
-          
-          // Save updated students
-          localStorage.setItem('students', JSON.stringify(updatedStudents));
-          
-          // Reload the attendance list
-          loadAllStudentsForAttendance();
-          
-          // Show success message
-          alert(`${removedCount} student(s) have been removed.`);
-        }
-      });
-      
-      // Send email notifications to absent students
-      sendEmailsBtn.addEventListener('click', function() {
-        sendEmailNotifications();
-      });
-      
-      // Save attendance
-      saveAttendanceBtn.addEventListener('click', function() {
-        saveAttendance();
-      });
-      
-      // Helper function to get selected student IDs
-      function getSelectedStudents() {
-        const checkboxes = document.querySelectorAll('.student-checkbox:checked');
-        return Array.from(checkboxes).map(checkbox => checkbox.getAttribute('data-student-id'));
-      }
-      
-      // Helper function to update attendance action buttons
-      function updateAttendanceActions() {
-        const selectedCount = document.querySelectorAll('.student-checkbox:checked').length;
-        if (selectedCount > 0) {
-          attendanceActions.classList.remove('d-none');
-          updateSendEmailButton();
-        } else {
-          attendanceActions.classList.add('d-none');
-          document.getElementById('send-emails-btn').classList.add('d-none');
-        }
-      }
-      
-      // Update the function to show email button whenever students are selected
-      function updateSendEmailButton() {
-        const sendEmailsBtn = document.getElementById('send-emails-btn');
-        const checkboxes = document.querySelectorAll('.student-checkbox:checked');
-        
-        if (checkboxes.length > 0) {
-          sendEmailsBtn.classList.remove('d-none');
-        } else {
-          sendEmailsBtn.classList.add('d-none');
-        }
-      }
-    }
-    
-    function searchStudents(searchTerm) {
-      const attendanceContainer = document.getElementById('attendance-container');
-      const attendanceLoading = document.getElementById('attendance-loading');
-      const attendanceList = document.getElementById('attendance-list');
-      const noStudentsAttendance = document.getElementById('no-students-attendance');
-      
-      if (!searchTerm) {
-        loadAllStudentsForAttendance();
-        return;
-      }
-      
-      // Show loading
-      attendanceContainer.classList.remove('d-none');
-      attendanceLoading.classList.remove('d-none');
-      noStudentsAttendance.classList.add('d-none');
-      
-      // Get students from local storage
-      const students = JSON.parse(localStorage.getItem('students')) || [];
-      
-      // Filter students based on search term
-      const filteredStudents = students.filter(student => 
-        student.name.toLowerCase().includes(searchTerm) || 
-        student.class.toLowerCase().includes(searchTerm) || 
-        student.rollNumber.toLowerCase().includes(searchTerm)
-      );
-      
-      // Hide loading
-      attendanceLoading.classList.add('d-none');
-      
-      // Check if there are students matching the search
-      if (filteredStudents.length === 0) {
-        noStudentsAttendance.classList.remove('d-none');
-        attendanceList.innerHTML = '';
-        document.getElementById('select-all-students').checked = false;
-        document.querySelector('.attendance-actions').classList.add('d-none');
-        return;
-      }
-      
-      // Get selected date
-      const selectedDate = document.getElementById('attendance-date').value;
-      
-      // Get existing attendance data for this date
-      const attendanceData = JSON.parse(localStorage.getItem('attendance')) || {};
-      const dateAttendance = attendanceData[selectedDate] || {};
-      
-      // Clear previous list
-      attendanceList.innerHTML = '';
-      
-      // Sort students by class and roll number
-      filteredStudents.sort((a, b) => {
-        if (a.class === b.class) {
-          return a.rollNumber.localeCompare(b.rollNumber, undefined, { numeric: true });
-        }
-        return a.class.localeCompare(b.class);
-      });
-      
-      // Populate the attendance list with sequential number
-      filteredStudents.forEach((student, index) => {
-        const row = document.createElement('tr');
-        
-        // Check if there's existing attendance data for this student
-        const existingData = dateAttendance[student.id] || { status: '' };
-        const isPresent = existingData.status === 'present';
-        const isAbsent = existingData.status === 'absent';
-        
-        row.innerHTML = `
-          <td>
-            <input type="checkbox" class="form-check-input student-checkbox" data-student-id="${student.id}">
-          </td>
-          <td>${index + 1}</td>
-          <td>${student.rollNumber}</td>
-          <td>${student.name}</td>
-          <td>${student.class}</td>
-          <td>
-            <span class="badge bg-success ${isPresent ? '' : 'd-none'}" data-student-id="${student.id}">Present</span>
-            <span class="badge bg-danger ${isAbsent ? '' : 'd-none'}" data-student-id="${student.id}">Absent</span>
-            <span class="badge bg-secondary ${!isPresent && !isAbsent ? '' : 'd-none'}" data-student-id="${student.id}">Not Marked</span>
-          </td>
-          <td>
-            <input type="hidden" class="student-status" data-student-id="${student.id}" value="${existingData.status}">
-            <input type="hidden" class="student-email" data-student-id="${student.id}" value="${student.email}">
-            <button class="btn btn-sm btn-danger remove-student-btn" data-student-id="${student.id}">
-              <i class="fas fa-trash-alt"></i> Remove
-            </button>
-          </td>
-        `;
-        
-        attendanceList.appendChild(row);
-      });
-      
-      // Set up remove buttons
-      setupRemoveButtons();
-      
-      // Reset select all checkbox
-      document.getElementById('select-all-students').checked = false;
-      document.querySelector('.attendance-actions').classList.add('d-none');
-    }
-    
-    function loadAllStudentsForAttendance() {
-      const attendanceContainer = document.getElementById('attendance-container');
-      const attendanceLoading = document.getElementById('attendance-loading');
-      const attendanceList = document.getElementById('attendance-list');
-      const noStudentsAttendance = document.getElementById('no-students-attendance');
-      
-      // Show loading
-      attendanceContainer.classList.remove('d-none');
-      attendanceLoading.classList.remove('d-none');
-      noStudentsAttendance.classList.add('d-none');
-      
-      // Get students from local storage
-      const students = JSON.parse(localStorage.getItem('students')) || [];
-      
-      // Hide loading
-      attendanceLoading.classList.add('d-none');
-      
-      // Check if there are any students
-      if (students.length === 0) {
-        noStudentsAttendance.classList.remove('d-none');
-        attendanceList.innerHTML = '';
-        document.getElementById('select-all-students').checked = false;
-        document.querySelector('.attendance-actions').classList.add('d-none');
-        return;
-      }
-      
-      // Get selected date
-      const selectedDate = document.getElementById('attendance-date').value;
-      
-      // Get existing attendance data for this date
-      const attendanceData = JSON.parse(localStorage.getItem('attendance')) || {};
-      const dateAttendance = attendanceData[selectedDate] || {};
-      
-      // Clear previous list
-      attendanceList.innerHTML = '';
-      
-      // Sort students by class and roll number
-      students.sort((a, b) => {
-        if (a.class === b.class) {
-          return a.rollNumber.localeCompare(b.rollNumber, undefined, { numeric: true });
-        }
-        return a.class.localeCompare(b.class);
-      });
-      
-      // Populate the attendance list with sequential number
-      students.forEach((student, index) => {
-        const row = document.createElement('tr');
-        
-        // Check if there's existing attendance data for this student
-        const existingData = dateAttendance[student.id] || { status: '' };
-        const isPresent = existingData.status === 'present';
-        const isAbsent = existingData.status === 'absent';
-        
-        row.innerHTML = `
-          <td>
-            <input type="checkbox" class="form-check-input student-checkbox" data-student-id="${student.id}">
-          </td>
-          <td>${index + 1}</td>
-          <td>${student.rollNumber}</td>
-          <td>${student.name}</td>
-          <td>${student.class}</td>
-          <td>
-            <span class="badge bg-success ${isPresent ? '' : 'd-none'}" data-student-id="${student.id}">Present</span>
-            <span class="badge bg-danger ${isAbsent ? '' : 'd-none'}" data-student-id="${student.id}">Absent</span>
-            <span class="badge bg-secondary ${!isPresent && !isAbsent ? '' : 'd-none'}" data-student-id="${student.id}">Not Marked</span>
-          </td>
-          <td>
-            <input type="hidden" class="student-status" data-student-id="${student.id}" value="${existingData.status}">
-            <input type="hidden" class="student-email" data-student-id="${student.id}" value="${student.email}">
-            <button class="btn btn-sm btn-danger remove-student-btn" data-student-id="${student.id}">
-              <i class="fas fa-trash-alt"></i> Remove
-            </button>
-          </td>
-        `;
-        
-        attendanceList.appendChild(row);
-      });
-      
-      // Set up remove buttons
-      setupRemoveButtons();
-      
-      // Reset select all checkbox
-      document.getElementById('select-all-students').checked = false;
-      document.querySelector('.attendance-actions').classList.add('d-none');
-    }
-    
-    function saveAttendance() {
-      // Get selected date
-      const selectedDate = document.getElementById('attendance-date').value;
-      
-      if (!selectedDate) {
-        alert('Please select a date.');
-        return;
-      }
-      
-      // Get existing attendance data
-      const attendanceData = JSON.parse(localStorage.getItem('attendance')) || {};
-      
-      // Initialize or update attendance data for this date
-      attendanceData[selectedDate] = attendanceData[selectedDate] || {};
-      
-      // Get all status inputs
-      const statusInputs = document.querySelectorAll('.student-status');
-      
-      // Count changes
-      let updatedCount = 0;
-      
-      // Update attendance for each student
-      statusInputs.forEach(input => {
-        const studentId = input.getAttribute('data-student-id');
-        const status = input.value;
-        
-        if (!status) {
-          return; // Skip if status not set
-        }
-        
-        // Check if there's a change in the data
-        const existingData = attendanceData[selectedDate][studentId] || { status: '' };
-        if (existingData.status !== status) {
-          updatedCount++;
-        }
-        
-        // Add to attendance data
-        attendanceData[selectedDate][studentId] = {
-          status: status,
-          remarks: ''  // No remarks functionality anymore
-        };
-      });
-      
-      // Save updated attendance data to local storage
-      localStorage.setItem('attendance', JSON.stringify(attendanceData));
-      
-      // Show success message
-      alert(`Attendance saved successfully! Updated ${updatedCount} student records.`);
-    }
-    
-    function sendEmailNotifications() {
-      const selectedDate = document.getElementById('attendance-date').value;
-      const formattedDate = formatDate(selectedDate);
-      
-      // Get all students with status "absent"
-      const absentStudentIds = [];
-      const statusInputs = document.querySelectorAll('.student-status');
-      
-      statusInputs.forEach(input => {
-        if (input.value === 'absent') {
-          absentStudentIds.push(input.getAttribute('data-student-id'));
-        }
-      });
-      
-      if (absentStudentIds.length === 0) {
-        alert('No absent students to notify.');
-        return;
-      }
-      
-      // Collect emails
-      const absentStudentEmails = [];
-      absentStudentIds.forEach(id => {
-        const emailInput = document.querySelector(`.student-email[data-student-id="${id}"]`);
-        if (emailInput && emailInput.value) {
-          absentStudentEmails.push(emailInput.value);
-        }
-      });
-      
-      if (absentStudentEmails.length === 0) {
-        alert('No email addresses found for absent students.');
-        return;
-      }
-      
-      // Format emails properly for Gmail
-      // Gmail expects comma-separated emails without spaces
-      const emails = absentStudentEmails.join(',');
-      
-      const subject = `Absence Notification - ${formattedDate}`;
-      const body = `Dear Parents/Guardians,%0D%0A%0D%0AThis is to inform you that your child was marked absent on ${formattedDate}.%0D%0A%0D%0APlease contact the school administration for any clarification.%0D%0A%0D%0ARegards,%0D%0ASchool Administration`;
-      
-      window.open(`mailto:${emails}?subject=${subject}&body=${body}`, '_blank');
-      
-      console.log('Sending email notifications to:', emails);
-      console.log('Total absent students:', absentStudentEmails.length);
-    }
-    
-    // Add the setup function for the remove buttons
-    function setupRemoveButtons() {
-      const removeButtons = document.querySelectorAll('.remove-student-btn');
-      
-      removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const studentId = this.getAttribute('data-student-id');
-          removeStudent(studentId);
-        });
-      });
-    }
-    
-    // Add the remove student function
-    function removeStudent(studentId) {
-      if (confirm('Are you sure you want to remove this student?')) {
-        // Get students from localStorage
-        const students = JSON.parse(localStorage.getItem('students')) || [];
-        
-        // Find student
-        const studentIndex = students.findIndex(s => s.id === studentId);
-        
-        if (studentIndex !== -1) {
-          const studentName = students[studentIndex].name;
-          
-          // Remove student
-          students.splice(studentIndex, 1);
-          
-          // Save updated students
-          localStorage.setItem('students', JSON.stringify(students));
-          
-          // Reload the attendance list
-          loadAllStudentsForAttendance();
-          
-          // Show success message
-          alert(`Student "${studentName}" has been removed.`);
-        }
-      }
-    }
   </script>
 </body>
 </html> 
