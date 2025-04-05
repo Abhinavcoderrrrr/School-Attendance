@@ -633,6 +633,139 @@ document.addEventListener('DOMContentLoaded', function() {
   const attendanceContainer = document.getElementById('attendance-container');
   const markAttendanceBtn = document.getElementById('mark-attendance-btn');
   
+  // Search for students - now with real-time search
+  if (studentSearch) {
+    // Initialize by showing all students first
+    setTimeout(() => {
+      if (searchStudentsBtn) {
+        searchStudentsBtn.click();
+      }
+    }, 300);
+    
+    // Add input event listener for real-time filtering
+    studentSearch.addEventListener('input', function() {
+      // Use debounce to prevent too many searches while typing
+      clearTimeout(this.searchTimeout);
+      this.searchTimeout = setTimeout(() => {
+        const searchQuery = this.value.toLowerCase();
+        const date = attendanceDate.value;
+        
+        // Always keep all students visible in the DOM
+        const allStudentItems = document.querySelectorAll('.attendance-item');
+        
+        if (searchQuery.trim() === '') {
+          // If search is empty, show all students
+          allStudentItems.forEach(item => {
+            item.classList.remove('d-none');
+          });
+          noFoundStudents.classList.add('d-none');
+          return;
+        }
+        
+        // Filter visible students based on search
+        let foundMatch = false;
+        
+        allStudentItems.forEach(item => {
+          const studentName = item.querySelector('.col-md-4 span:last-child').textContent.toLowerCase();
+          const studentRoll = item.querySelector('.col-md-2 span').textContent.toLowerCase();
+          const studentClass = item.querySelector('.col-md-2:nth-child(4)').textContent.toLowerCase();
+          
+          if (studentName.includes(searchQuery) || 
+              studentRoll.includes(searchQuery) || 
+              studentClass.includes(searchQuery)) {
+            item.classList.remove('d-none');
+            foundMatch = true;
+          } else {
+            item.classList.add('d-none');
+          }
+        });
+        
+        // Show/hide no results message
+        if (!foundMatch) {
+          noFoundStudents.classList.remove('d-none');
+        } else {
+          noFoundStudents.classList.add('d-none');
+        }
+      }, 300); // Debounce 300ms
+    });
+  }
+  
+  // Load all students initially for the attendance page
+  function loadAllStudents() {
+    const date = attendanceDate.value;
+    
+    // Show loading
+    attendanceContainer.classList.remove('d-none');
+    document.getElementById('attendance-loading').classList.remove('d-none');
+    document.getElementById('found-students-list').innerHTML = '';
+    
+    // Simulate loading (brief for better UX)
+    setTimeout(() => {
+      document.getElementById('attendance-loading').classList.add('d-none');
+      
+      if (students.length === 0) {
+        noFoundStudents.classList.remove('d-none');
+        return;
+      }
+      
+      noFoundStudents.classList.add('d-none');
+      
+      // Display all students
+      students.forEach((student, index) => {
+        // Check if attendance already marked for this date
+        const attendanceRecord = student.attendance.find(a => a.date === date);
+        const isPresent = attendanceRecord ? attendanceRecord.status === 'present' : null;
+        
+        const studentItem = document.createElement('div');
+        studentItem.className = 'attendance-item';
+        studentItem.innerHTML = `
+          <div class="row align-items-center">
+            <div class="col-md-1">
+              <span class="fw-medium">${index + 1}</span>
+            </div>
+            <div class="col-md-2">
+              <div class="d-flex align-items-center">
+                <div class="form-check me-3 d-none">
+                  <input class="form-check-input attendance-checkbox" type="checkbox" data-student-id="${student.id}" id="student-${student.id}" ${isPresent === true ? 'checked' : isPresent === false ? '' : ''}>
+                  <label class="form-check-label" for="student-${student.id}"></label>
+                </div>
+                <span>${student.roll}</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="d-flex align-items-center">
+                <span class="badge ${isPresent === true ? 'bg-success' : isPresent === false ? 'bg-danger' : 'bg-secondary'} me-2">${isPresent === true ? 'Present' : isPresent === false ? 'Absent' : 'Not Marked'}</span>
+                <span>${student.name}</span>
+              </div>
+            </div>
+            <div class="col-md-2">${student.class}</div>
+            <div class="col-md-3">
+              <div class="d-flex justify-content-end gap-2">
+                <button class="btn btn-sm ${isPresent === true ? 'btn-success' : 'btn-outline-success'} mark-present-btn" data-student-id="${student.id}">
+                  <i class="fas fa-check-circle"></i>
+                </button>
+                <button class="btn btn-sm ${isPresent === false ? 'btn-danger' : 'btn-outline-danger'} mark-absent-btn" data-student-id="${student.id}">
+                  <i class="fas fa-times-circle"></i>
+                </button>
+                <button class="btn btn-sm btn-info send-message-btn ${isPresent === true ? 'd-none' : ''}" data-student-id="${student.id}" data-student-email="${student.email}">
+                  <i class="fas fa-envelope me-1"></i>Message
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        foundStudentsList.appendChild(studentItem);
+      });
+      
+      // Add event listeners to the attendance action buttons
+      addAttendanceButtonListeners();
+      
+      // Update button styles
+      updateAttendanceButtonStyles();
+    }, 300);
+  }
+  
   // Set today's date by default for the mark attendance date input
   if (attendanceDate) {
     attendanceDate.value = getTodayDate();
@@ -644,113 +777,10 @@ document.addEventListener('DOMContentLoaded', function() {
     dateDisplayElem.innerHTML = `<i class="fas fa-calendar-day me-1"></i> Today: ${formatDate(getTodayDate())}`;
     attendanceDate.parentNode.insertBefore(dateDisplayElem, attendanceDate);
     
-    // Automatically show all students when the page loads
+    // Automatically load all students when the page loads
     setTimeout(() => {
-      if (searchStudentsBtn) {
-        searchStudentsBtn.click();
-      }
+      loadAllStudents();
     }, 300);
-  }
-  
-  // Search for students - now with real-time search
-  if (studentSearch) {
-    // Initialize by showing all students first
-    setTimeout(() => {
-      if (searchStudentsBtn) {
-        searchStudentsBtn.click();
-      }
-    }, 300);
-    
-    // Add input event listener for real-time search
-    studentSearch.addEventListener('input', function() {
-      // Use debounce to prevent too many searches while typing
-      clearTimeout(this.searchTimeout);
-      this.searchTimeout = setTimeout(() => {
-        const searchQuery = this.value.toLowerCase();
-        const date = attendanceDate.value;
-        
-        // Show loading
-        attendanceContainer.classList.remove('d-none');
-        document.getElementById('attendance-loading').classList.remove('d-none');
-        document.getElementById('found-students-list').innerHTML = '';
-        
-        // Simulate loading (brief for better UX)
-        setTimeout(() => {
-          document.getElementById('attendance-loading').classList.add('d-none');
-          
-          // Filter students based on search
-          let filteredStudents = students;
-          if (searchQuery) {
-            filteredStudents = students.filter(student => 
-              student.name.toLowerCase().includes(searchQuery) ||
-              student.roll.toLowerCase().includes(searchQuery) ||
-              student.class.toLowerCase().includes(searchQuery)
-            );
-          }
-          
-          if (filteredStudents.length === 0) {
-            noFoundStudents.classList.remove('d-none');
-            return;
-          }
-          
-          noFoundStudents.classList.add('d-none');
-          
-          // Display filtered students
-          filteredStudents.forEach((student, index) => {
-            // Check if attendance already marked for this date
-            const attendanceRecord = student.attendance.find(a => a.date === date);
-            const isPresent = attendanceRecord ? attendanceRecord.status === 'present' : null;
-            
-            const studentItem = document.createElement('div');
-            studentItem.className = 'attendance-item';
-            studentItem.innerHTML = `
-              <div class="row align-items-center">
-                <div class="col-md-1">
-                  <span class="fw-medium">${index + 1}</span>
-                </div>
-                <div class="col-md-2">
-                  <div class="d-flex align-items-center">
-                    <div class="form-check me-3 d-none">
-                      <input class="form-check-input attendance-checkbox" type="checkbox" data-student-id="${student.id}" id="student-${student.id}" ${isPresent === true ? 'checked' : isPresent === false ? '' : ''}>
-                      <label class="form-check-label" for="student-${student.id}"></label>
-                    </div>
-                    <span>${student.roll}</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="d-flex align-items-center">
-                    <span class="badge ${isPresent === true ? 'bg-success' : isPresent === false ? 'bg-danger' : 'bg-secondary'} me-2">${isPresent === true ? 'Present' : isPresent === false ? 'Absent' : 'Not Marked'}</span>
-                    <span>${student.name}</span>
-                  </div>
-                </div>
-                <div class="col-md-2">${student.class}</div>
-                <div class="col-md-3">
-                  <div class="d-flex justify-content-end gap-2">
-                    <button class="btn btn-sm ${isPresent === true ? 'btn-success' : 'btn-outline-success'} mark-present-btn" data-student-id="${student.id}">
-                      <i class="fas fa-check-circle"></i>
-                    </button>
-                    <button class="btn btn-sm ${isPresent === false ? 'btn-danger' : 'btn-outline-danger'} mark-absent-btn" data-student-id="${student.id}">
-                      <i class="fas fa-times-circle"></i>
-                    </button>
-                    <button class="btn btn-sm btn-info send-message-btn ${isPresent === true ? 'd-none' : ''}" data-student-id="${student.id}" data-student-email="${student.email}">
-                      <i class="fas fa-envelope me-1"></i>Message
-                    </button>
-                  </div>
-                </div>
-              </div>
-            `;
-            
-            foundStudentsList.appendChild(studentItem);
-          });
-          
-          // Add event listeners to the attendance action buttons
-          addAttendanceButtonListeners();
-          
-          // Update button styles
-          updateAttendanceButtonStyles();
-        }, 300);
-      }, 300); // Debounce 300ms
-    });
   }
   
   // Helper function to add event listeners to attendance buttons
